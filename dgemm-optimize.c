@@ -15,7 +15,7 @@ void dgemm( int m, int n, float *A, float *C )
 {
 	for( int i = 0; i < m; i++ )
 	{
-		for( int k = 0; k < n-3; k+=4 ) 
+		for( int k = 0; k < n; k++ ) 
 		{		
 			for( int j = 0; j < m-3; j+=4 )
 			{
