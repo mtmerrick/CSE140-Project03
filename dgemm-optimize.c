@@ -33,7 +33,6 @@ void dgemm( int m, int n, float *A, float *C )
 					case 1:
 					{
 						C[i+(j+3)*m] += A[i+k*m] * A[(j+3)+k*m];
-						break;
 					}
 				}
 			}
