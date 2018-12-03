@@ -22,15 +22,15 @@ void dgemm( int m, int n, float *A, float *C )
 			{
 				C[i+j*m] += A[i+k*m] * A[j+k*m];
 				switch(m-j){
-					case 3:
+					case 4:
 					{
 						C[i+(j+1)*m] += A[i+k*m] * A[(j+1)+k*m];
 					}
-					case 2:
+					case 3:
 					{
 						C[i+(j+2)*m] += A[i+k*m] * A[(j+2)+k*m];
 					}
-					case 1:
+					case 2:
 					{
 						C[i+(j+3)*m] += A[i+k*m] * A[(j+3)+k*m];
 					}
