@@ -18,15 +18,15 @@ void dgemm( int m, int n, float *A, float *C )
 	{
 		for(k = 0; k < n; k++ ) 
 		{		
-			for(j = 0; j < m; j+=5 )
+			for(j = 0; j < m; j+=4 )
 			{
 				C[i+j*m] += A[i+k*m] * A[j+k*m];
-				if(j + 4 < m){
-					C[i+(j+4)*m] += A[i+k*m] * A[(j+4)+k*m];
-					C[i+(j+3)*m] += A[i+k*m] * A[(j+3)+k*m];
-					C[i+(j+2)*m] += A[i+k*m] * A[(j+2)+k*m];
-					C[i+(j+1)*m] += A[i+k*m] * A[(j+1)+k*m];
-				}
+				// if(j + 4 < m){
+				// 	C[i+(j+4)*m] += A[i+k*m] * A[(j+4)+k*m];
+				// 	C[i+(j+3)*m] += A[i+k*m] * A[(j+3)+k*m];
+				// 	C[i+(j+2)*m] += A[i+k*m] * A[(j+2)+k*m];
+				// 	C[i+(j+1)*m] += A[i+k*m] * A[(j+1)+k*m];
+				// }
 				else if(j + 3 < m){
 					C[i+(j+3)*m] += A[i+k*m] * A[(j+3)+k*m];
 					C[i+(j+2)*m] += A[i+k*m] * A[(j+2)+k*m];
