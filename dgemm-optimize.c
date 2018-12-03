@@ -27,32 +27,25 @@ void dgemm( int m, int n, float *A, float *C )
 			}
 		}
 	}
-	switch(j){
-		case m-3:
-		{
-			C[i+(j)*m] += A[i+k*m] * A[(j)+k*m];
-			C[i+(j)*m] += A[i+k*m] * A[(j)+k*m];
-			C[i+(j)*m] += A[i+k*m] * A[(j)+k*m];
-			break;
-		}
-		case m-2:
-		{
-			C[i+(j-1)*m] += A[i+k*m] * A[(j-1)+k*m];
-			C[i+(j)*m] += A[i+k*m] * A[(j)+k*m];
-			C[i+(j+1)*m] += A[i+k*m] * A[(j+1)+k*m];
-		}
-		case m-1:
-		{
-			C[i+(j-2)*m] += A[i+k*m] * A[(j-2)+k*m];
-			C[i+(j-1)*m] += A[i+k*m] * A[(j-1)+k*m];
-			C[i+(j)*m] += A[i+k*m] * A[(j)+k*m];
-		}
-		case m:
-		{
-			C[i+(j-3)*m] += A[i+k*m] * A[(j-3)+k*m];
-			C[i+(j-2)*m] += A[i+k*m] * A[(j-2)+k*m];
-			C[i+(j-1)*m] += A[i+k*m] * A[(j-1)+k*m];
-		}
+	if(j == m-3){
+		C[i+(j)*m] += A[i+k*m] * A[(j)+k*m];
+		C[i+(j)*m] += A[i+k*m] * A[(j)+k*m];
+		C[i+(j)*m] += A[i+k*m] * A[(j)+k*m];
+	}
+	else if(j == m-2){
+		C[i+(j-1)*m] += A[i+k*m] * A[(j-1)+k*m];
+		C[i+(j)*m] += A[i+k*m] * A[(j)+k*m];
+		C[i+(j+1)*m] += A[i+k*m] * A[(j+1)+k*m];
+	}
+	else if(j == m-1){
+		C[i+(j-2)*m] += A[i+k*m] * A[(j-2)+k*m];
+		C[i+(j-1)*m] += A[i+k*m] * A[(j-1)+k*m];
+		C[i+(j)*m] += A[i+k*m] * A[(j)+k*m];
+	}
+	else if(j == m){
+		C[i+(j-3)*m] += A[i+k*m] * A[(j-3)+k*m];
+		C[i+(j-2)*m] += A[i+k*m] * A[(j-2)+k*m];
+		C[i+(j-1)*m] += A[i+k*m] * A[(j-1)+k*m];
 	}
 		
 }
