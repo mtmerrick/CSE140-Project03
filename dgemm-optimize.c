@@ -20,9 +20,9 @@ void dgemm( int m, int n, float *A, float *C )
 			for( int j = 0; j < m-3; j+=4 )
 			{
 				C[i+j*m] += A[i+k*m] * A[j+k*m];
-				C[i+(j+1)*(m+1)] += A[i+(k+1)*(m+1)] * A[j+(k+1)*(m+1)];
-				C[i+(j+2)*(m+2)] += A[i+(k+2)*(m+2)] * A[j+(k+2)*(m+2)];
-				C[i+(j+3)*(m+3)] += A[i+(k+3)*(m+3)] * A[j+(k+3)*(m+3)];
+				C[i+(j+1)*m] += A[i+(k+1)*m] * A[j+(k+1)*m];
+				C[i+(j+2)*m] += A[i+(k+2)*m] * A[j+(k+2)*m];
+				C[i+(j+3)*m] += A[i+(k+3)*m] * A[j+(k+3)*m];
 			}
 		}
 	}
