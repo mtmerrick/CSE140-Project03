@@ -33,19 +33,22 @@ void dgemm( int m, int n, float *A, float *C )
 {
 	if(m != n){
 		if(m < n){
-			for(i = m+1; i < n; i++){
+			for(int i = m+1; i < n; i++){
 				A[i*n] = 0;
 			}
 		}
 		else{
-			for(i = n+1; i < m; i++){
+			for(int i = n+1; i < m; i++){
 				A[i*m] = 0;
 			}
 		}
 	}
-	for( int i = 0; i < m; i++ )
-		for( int k = 0; k < n; k++ ) 
-			for( int j = 0; j < m; j++ ) 
+	for( int i = 0; i < m; i++ ){
+		for( int k = 0; k < n; k++ ) {
+			for( int j = 0; j < m; j++ ) {
 				C[i+j*m] += A[i+k*m] * A[j+k*m];
+			}
+		}
+	}
 	
 }*/
