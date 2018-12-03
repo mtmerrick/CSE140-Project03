@@ -18,7 +18,7 @@ void dgemm( int m, int n, float *A, float *C )
 	{
 		for(k = 0; k < n; k++ ) 
 		{		
-			for(j = 0; j < m-2; j+=3 )
+			for(j = 0; j < m; j+=3 )
 			{
 				C[i+j*m] += A[i+k*m] * A[j+k*m];
 				// if(j + 3 < m){
