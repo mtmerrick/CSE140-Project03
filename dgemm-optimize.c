@@ -1,12 +1,14 @@
+//Loop Reordering
 void dgemm( int m, int n, float *A, float *C )
 {
-	for( int i = 0; i < m; i++ )
-		for( int j = 0; j < m; j++ ) 
-			for( int k = 0; k < n; k++ ) 
+	for( int k = 0; k < n; k++ ) 
+		for( int i = 0; i < m; i++ )
+			for( int j = 0; j < m; j++ ) 
 				C[i+j*m] += A[i+k*m] * A[j+k*m];
 	
 }
 
+//Loop Unrolling
 /*void dgemm( int m, int n, float *A, float *C )
 {
 	for( int i = 0; i < m; i++ )
@@ -19,6 +21,7 @@ void dgemm( int m, int n, float *A, float *C )
 	
 }*/
 
+//Matrix Padding
 /*void dgemm( int m, int n, float *A, float *C )
 {
 	if(m != n){
