@@ -1,13 +1,13 @@
 //Loop Reordering
 
-// void dgemm( int m, int n, float *A, float *C )
-// {
-// 	for( int k = 0; k < n; k++ ) 
-// 		for( int i = 0; i < m; i++ )
-// 			for( int j = 0; j < m; j++ ) 
-// 				C[i+j*m] += A[i+k*m] * A[j+k*m];
+void dgemm( int m, int n, float *A, float *C )
+{
+	for( int i = 0; i < m; i++ ) 
+		for( int j = 0; j < m; j++ ) 
+			for( int k = 0; k < n; k++ )
+				C[i+j*m] += A[i+k*m] * A[j+k*m];
 	
-// }
+}
 
 
 //Loop Unrolling
@@ -60,43 +60,43 @@
 // }
 
 //Matrix Padding
-void dgemm( int m, int n, float *A, float *C )
-{
-	if(m != n){
-		if(m < n){
-			for(int i = m+1; i < n; i++){
-				for(int j = 0; j < m; j++){
-		 			A[i*j] = 0;
-				}
-			}
-			//m = n;
-		}
-		else{
-			for(int i = n+1; i < m; i++){
-				for(int j = 0; j < n; j++){
-		 			A[i*j] = 0;
-				}
-			}
-			//n = m;
-		}
-	}
-	// if(n % 2 != 0){
-	// 	for(int i = 0; i < m; i++){
-	// 		A[i*n] = 0;
-	// 	}
-	// }
+// void dgemm( int m, int n, float *A, float *C )
+// {
+// 	if(m != n){
+// 		if(m < n){
+// 			for(int i = m+1; i < n; i++){
+// 				for(int j = 0; j < m; j++){
+// 		 			A[i*j] = 0;
+// 				}
+// 			}
+// 			//m = n;
+// 		}
+// 		else{
+// 			for(int i = n+1; i < m; i++){
+// 				for(int j = 0; j < n; j++){
+// 		 			A[i*j] = 0;
+// 				}
+// 			}
+// 			//n = m;
+// 		}
+// 	}
+// 	// if(n % 2 != 0){
+// 	// 	for(int i = 0; i < m; i++){
+// 	// 		A[i*n] = 0;
+// 	// 	}
+// 	// }
 	
-	// else if(m % 2 != 0){
-	// 	for(int i = 0; i < n; i++){
-	// 		A[i*m] = 0;
-	// 	}
-	// }
-	for( int i = 0; i < m; i++ ){
-		for( int k = 0; k < n; k++ ) {
-			for( int j = 0; j < m; j++ ) {
-				C[i+j*m] += A[i+k*m] * A[j+k*m];
-			}
-		}
-	}
+// 	// else if(m % 2 != 0){
+// 	// 	for(int i = 0; i < n; i++){
+// 	// 		A[i*m] = 0;
+// 	// 	}
+// 	// }
+// 	for( int i = 0; i < m; i++ ){
+// 		for( int k = 0; k < n; k++ ) {
+// 			for( int j = 0; j < m; j++ ) {
+// 				C[i+j*m] += A[i+k*m] * A[j+k*m];
+// 			}
+// 		}
+// 	}
 	
-}
+// }
