@@ -13,7 +13,7 @@ void dgemm( int m, int n, float *A, float *C )
 				__m128 tertius = _mm_load_ss(C + (i + j * m));
 				__m128 quartus = _mm_mul_ss(primus, secundus);
 				__m128 quintus = _mm_add_ss(tertius, quartus);
-				_mm_store_ss(tertius, quintus);
+				_mm_store_ss(C + (i + j * m), quintus);
 			}
 		}
 	}
