@@ -1,1 +1,1 @@
-make clean && make && ./bench-naive && ./bench-optimize
+make clean && make && printf "Naive\n" && ./bench-naive && printf "Optimized\n" && ./bench-optimize
