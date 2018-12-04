@@ -6,10 +6,10 @@
 void dgemm( int m, int n, float *A, float *C )
 {
 	for( int i = 0; i < m; i++ ) {
-		for( int j = 0; j < m; j++ ) {
-			for( int k = 0; k < n; k++ ){
-				__m128 primus = _mm_load_ss(A + (i + k * m));
-				__m128 secundus = _mm_load_ss(A + (i + j * m));
+		for( int k = 0; k < m; k++ ) {
+			for( int j = 0; j < n; j++ ){
+				__m128 primus = _mm_load_ss(A + (i + j * m));
+				__m128 secundus = _mm_load_ss(A + (i + k * m));
 				__m128 tertius = _mm_mul_ss(primus, secundus);
 				__m128 quartus = _mm_load_ss(C + (i + j * m));
 				__m128 quintus = _mm_add_ss(tertius, quartus);
