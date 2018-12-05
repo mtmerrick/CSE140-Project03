@@ -3,21 +3,21 @@
 #include <emmintrin.h>
 
 //SSE
-void dgemm( int m, int n, float *A, float *C )
-{
-	for( int i = 0; i < m; i++ ) {
-		for( int k = 0; k < n; k++ ) {
-			for( int j = 0; j < m; j++ ){
-				__m128 primus = _mm_load_ss(A + (j + k * m));
-				__m128 secundus = _mm_load_ss(A + (i + k * m));
-				__m128 tertius = _mm_load_ss(C + (i + j * m));
-				__m128 quartus = _mm_mul_ss(primus, secundus);
-				__m128 quintus = _mm_add_ss(tertius, quartus);
-				_mm_store_ss(C + (i + j * m), quintus);
-			}
-		}
-	}
-}
+// void dgemm( int m, int n, float *A, float *C )
+// {
+// 	for( int i = 0; i < m; i++ ) {
+// 		for( int k = 0; k < n; k++ ) {
+// 			for( int j = 0; j < m; j++ ){
+// 				__m128 primus = _mm_load_ss(A + (j + k * m));
+// 				__m128 secundus = _mm_load_ss(A + (i + k * m));
+// 				__m128 tertius = _mm_load_ss(C + (i + j * m));
+// 				__m128 quartus = _mm_mul_ss(primus, secundus);
+// 				__m128 quintus = _mm_add_ss(tertius, quartus);
+// 				_mm_store_ss(C + (i + j * m), quintus);
+// 			}
+// 		}
+// 	}
+// }
 
 
 //Loop Unrolling
@@ -69,38 +69,35 @@ void dgemm( int m, int n, float *A, float *C )
 		
 // }
 
-//Matrix Padding
+//Cache Blocking
+void dgemm( int m, int n, float *A, float *C )
+{
+	final int BASE_BLOCK_SIZE = 10;
+	for( int i = 0; i < m; i++ ){
+		for( int k = 0; k < n; k++ ) {
+			for( int j = 0; j < m; j++ ) {
+				final int BLOCK_1 = (i + BASE_BLOCK_SIZE < m)? (i + BASE_BLOCK_SIZE): m;
+				for(int i2 = i; i2 < BLOCK_1; i2++){
+					final int BLOCK_2 = (k + BASE_BLOCK_SIZE < m)? (k + BASE_BLOCK_SIZE): m;
+					for(int k2 = k; k2 < BLOCK_2; k2++){
+						final int BLOCK_3 =  (j + BASE_BLOCK_SIZE < m)? (j + BASE_BLOCK_SIZE): m;
+						for(int j2 = j; j2 < BLOCK_3; j2++){
+							C[i2+j2*m] += A[i2+k2*m] * A[j2+k2*m];
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
 // void dgemm( int m, int n, float *A, float *C )
 // {
-// 	if(m != n){
-// 		if(m < n){
-// 			for(int i = m+1; i < n; i++){
-// 				for(int j = 0; j < m; j++){
-// 		 			A[i*j] = 0;
-// 				}
-// 			}
-// 			//m = n;
-// 		}
-// 		else{
-// 			for(int i = n+1; i < m; i++){
-// 				for(int j = 0; j < n; j++){
-// 		 			A[i*j] = 0;
-// 				}
-// 			}
-// 			//n = m;
+// 	if(m % 2 != 0){
+// 		for(int i = 0; i < m + 1; i++){
+// 			A[i*m] = 0;
 // 		}
 // 	}
-// 	// if(n % 2 != 0){
-// 	// 	for(int i = 0; i < m; i++){
-// 	// 		A[i*n] = 0;
-// 	// 	}
-// 	// }
-	
-// 	// else if(m % 2 != 0){
-// 	// 	for(int i = 0; i < n; i++){
-// 	// 		A[i*m] = 0;
-// 	// 	}
-// 	// }
 // 	for( int i = 0; i < m; i++ ){
 // 		for( int k = 0; k < n; k++ ) {
 // 			for( int j = 0; j < m; j++ ) {
