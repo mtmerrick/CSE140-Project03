@@ -82,7 +82,7 @@ void dgemm( int m, int n, float *A, float *C )
 			for( int j = 0; j < m; j+=BASE_BLOCK_SIZE ) {
 				(i + BASE_BLOCK_SIZE < m)? (BLOCK_1 = i + BASE_BLOCK_SIZE): (BLOCK_1 = m);
 				for(int i2 = i; i2 < BLOCK_1; i2++){
-					(k + BASE_BLOCK_SIZE < m)? (BLOCK_2 = k + BASE_BLOCK_SIZE): (BLOCK_2 = m);
+					(k + BASE_BLOCK_SIZE < n)? (BLOCK_2 = k + BASE_BLOCK_SIZE): (BLOCK_2 = n);
 					for(int k2 = k; k2 < BLOCK_2; k2++){
 						(j + BASE_BLOCK_SIZE < m)? (BLOCK_3 =  j + BASE_BLOCK_SIZE): (BLOCK_3 = m);
 						for(int j2 = j; j2 < BLOCK_3; j2++){
