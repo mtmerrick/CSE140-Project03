@@ -8,8 +8,7 @@ void dgemm( int m, int n, float *A, float *C )
 	for( int i = 0; i < m; i++ ) {
 		for( int k = 0; k < n; k++ ) {
 			for( int j = 0; j < m; j++ ){
-				__m128 primus;
-				(j < m -3) ?(primus = _mm_load_ps(A + (j + k * m))): (primus = _mm_load_ss(A + (j + k * m)));
+				__m128 primus = _mm_load_ss(A + (j + k * m));
 				__m128 secundus = _mm_load_ss(A + (i + k * m));
 				__m128 tertius = _mm_load_ss(C + (i + j * m));
 				__m128 quartus = _mm_mul_ss(primus, secundus);
