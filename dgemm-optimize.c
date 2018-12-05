@@ -1,6 +1,7 @@
 #include <mmintrin.h>
 #include <xmmintrin.h>
 #include <emmintrin.h>
+#include <stdio.h>
 
 //SSE
 // void dgemm( int m, int n, float *A, float *C )
