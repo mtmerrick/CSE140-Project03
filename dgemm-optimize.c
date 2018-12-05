@@ -81,7 +81,7 @@ void dgemm( int m, int n, float *A, float *C )
 		for( int k = 0; k < n; k++ ) {
 			for( int j = 0; j < m; j++ ) {
 				(i + BASE_BLOCK_SIZE < m)? (BLOCK_1 = i + BASE_BLOCK_SIZE): (BLOCK_1 = m);
-				printf(%d%s%d, BLOCK_1, "\t", m);
+				printf("\n BLOCK_1:%d m:%d\n", BLOCK_1, m);
 				for(int i2 = i; i2 < BLOCK_1; i2++){
 					(k + BASE_BLOCK_SIZE < m)? (BLOCK_2 = k + BASE_BLOCK_SIZE): (BLOCK_2 = m);
 					for(int k2 = k; k2 < BLOCK_2; k2++){
