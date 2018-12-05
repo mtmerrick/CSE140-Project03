@@ -12,9 +12,9 @@ void dgemm( int m, int n, float *A, float *C )
 				__m128 primus = _mm_load_ps(A + (j + k * m));
 				__m128 secundus = _mm_load_ps(A + (i + k * m));
 				__m128 tertius = _mm_load_ps(C + (i + j * m));
-				__m128 quartus = _mm_mul_ps(primus, secundus);
-				__m128 quintus = _mm_add_ps(tertius, quartus);
-				_mm_store_ps(C + (i + j * m), quintus);
+				__m128 quartus = _mm_mul_ss(primus, secundus);
+				__m128 quintus = _mm_add_ss(tertius, quartus);
+				_mm_store_ss(C + (i + j * m), quintus);
 			}
 		}
 	}
