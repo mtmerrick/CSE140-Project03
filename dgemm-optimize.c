@@ -1,7 +1,6 @@
 #include <mmintrin.h>
 #include <xmmintrin.h>
 #include <emmintrin.h>
-#include <stdio.h>
 
 //SSE
 void dgemm( int m, int n, float *A, float *C )
@@ -9,7 +8,7 @@ void dgemm( int m, int n, float *A, float *C )
 	for( int i = 0; i < m; i++ ) {
 		for( int k = 0; k < n; k++ ) {
 			for( int j = 0; j < m; j++ ){
-				__m128 primus = _mm_load_ss(A + (j + k * m));
+				(j < m -3) ?(__m128 primus = _mm_load_ps(A + (j + k * m))): (__m128 primus = _mm_load_ss(A + (j + k * m)));
 				__m128 secundus = _mm_load_ss(A + (i + k * m));
 				__m128 tertius = _mm_load_ss(C + (i + j * m));
 				__m128 quartus = _mm_mul_ss(primus, secundus);
@@ -53,20 +52,6 @@ void dgemm( int m, int n, float *A, float *C )
 // 			}
 // 		}
 // 	}
-// 	// switch(m-j){
-// 	// 	case 3:
-// 	// 	{
-// 	// 		C[i+(j+3)*m] += A[i+k*m] * A[(j+3)+k*m];
-// 	// 	}
-// 	// 	case 2:
-// 	// 	{
-// 	// 		C[i+(j+2)*m] += A[i+k*m] * A[(j+2)+k*m];
-// 	// 	}
-// 	// 	case 1:
-// 	// 	{
-// 	// 		C[i+(j+1)*m] += A[i+k*m] * A[(j+1)+k*m];
-// 	// 	}
-// 	// }
 		
 // }
 
@@ -93,21 +78,4 @@ void dgemm( int m, int n, float *A, float *C )
 // 			}
 // 		}
 // 	}
-// }
-
-// void dgemm( int m, int n, float *A, float *C )
-// {
-// 	if(m % 2 != 0){
-// 		for(int i = 0; i < m + 1; i++){
-// 			A[i*m] = 0;
-// 		}
-// 	}
-// 	for( int i = 0; i < m; i++ ){
-// 		for( int k = 0; k < n; k++ ) {
-// 			for( int j = 0; j < m; j++ ) {
-// 				C[i+j*m] += A[i+k*m] * A[j+k*m];
-// 			}
-// 		}
-// 	}
-	
 // }
