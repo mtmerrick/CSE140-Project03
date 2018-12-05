@@ -77,6 +77,7 @@ void dgemm( int m, int n, float *A, float *C )
 		for( int k = 0; k < n; k++ ) {
 			for( int j = 0; j < m; j++ ) {
 				const int BLOCK_1 = (i + BASE_BLOCK_SIZE < m)? (i + BASE_BLOCK_SIZE): m;
+				printf(BLOCK_1, %d);
 				for(int i2 = i; i2 < BLOCK_1; i2++){
 					const int BLOCK_2 = (k + BASE_BLOCK_SIZE < m)? (k + BASE_BLOCK_SIZE): m;
 					for(int k2 = k; k2 < BLOCK_2; k2++){
