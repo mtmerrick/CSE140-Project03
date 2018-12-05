@@ -1,5 +1,3 @@
-//#include <mmintrin.h>
-//#include <xmmintrin.h>
 #include <emmintrin.h>
 
 //SSE
