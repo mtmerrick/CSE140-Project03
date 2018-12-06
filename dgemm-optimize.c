@@ -6,43 +6,44 @@ void dgemm( int m, int n, float *A, float *C )
 	for( int i = 0; i < m; i++ ) {
 		for( int k = 0; k < n; k++ ) {
 			for( int j = 0; j < m; j+=4 ){
+				__m128 primus, secundus, tertius, quartus, quintus;
 				else if(j + 3 < m && i + 3 < m){
-					__m128 primus = _mm_load_ps(A + (j + k * m));
-					__m128 secundus = _mm_load_ps(A + (i + k * m));
-					__m128 tertius = _mm_load_ps(C + (i + j * m));
-					__m128 quartus = _mm_mul_ps(primus, secundus);
-					__m128 quintus = _mm_add_ps(tertius, quartus);
+					primus = _mm_load_ps(A + (j + k * m));
+					secundus = _mm_load_ps(A + (i + k * m));
+					tertius = _mm_load_ps(C + (i + j * m));
+					quartus = _mm_mul_ps(primus, secundus);
+					quintus = _mm_add_ps(tertius, quartus);
 					_mm_store_ps(C + (i + j * m), quintus);
 					continue;
 				}
 				else if(j + 2 < m){
-					__m128 primus = _mm_load_ss(A + (j + 2 + k * m));
-					__m128 secundus = _mm_load_ss(A + (i + k * m));
-					__m128 tertius = _mm_load_ss(C + (i + (j+2) * m));
-					__m128 quartus = _mm_mul_ss(primus, secundus);
-					__m128 quintus = _mm_add_ss(tertius, quartus);
+					primus = _mm_load_ss(A + (j + 2 + k * m));
+					secundus = _mm_load_ss(A + (i + k * m));
+					tertius = _mm_load_ss(C + (i + (j+2) * m));
+					quartus = _mm_mul_ss(primus, secundus);
+					quintus = _mm_add_ss(tertius, quartus);
 					_mm_store_ss(C + (i + (j+2) * m), quintus);
 
-					__m128 primus = _mm_load_ss(A + (j + 1 + k * m));
-					__m128 secundus = _mm_load_ss(A + (i + k * m));
-					__m128 tertius = _mm_load_ss(C + (i + (j+1) * m));
-					__m128 quartus = _mm_mul_ss(primus, secundus);
-					__m128 quintus = _mm_add_ss(tertius, quartus);
+					primus = _mm_load_ss(A + (j + 1 + k * m));
+					secundus = _mm_load_ss(A + (i + k * m));
+					tertius = _mm_load_ss(C + (i + (j+1) * m));
+					quartus = _mm_mul_ss(primus, secundus);
+					quintus = _mm_add_ss(tertius, quartus);
 					_mm_store_ss(C + (i + (j+1) * m), quintus);
 				}
 				else if(j + 1 < m){
-					__m128 primus = _mm_load_ss(A + (j + 1 + k * m));
-					__m128 secundus = _mm_load_ss(A + (i + k * m));
-					__m128 tertius = _mm_load_ss(C + (i + (j+1) * m));
-					__m128 quartus = _mm_mul_ss(primus, secundus);
-					__m128 quintus = _mm_add_ss(tertius, quartus);
+					primus = _mm_load_ss(A + (j + 1 + k * m));
+					secundus = _mm_load_ss(A + (i + k * m));
+					tertius = _mm_load_ss(C + (i + (j+1) * m));
+					quartus = _mm_mul_ss(primus, secundus);
+					quintus = _mm_add_ss(tertius, quartus);
 					_mm_store_ss(C + (i + (j+1) * m), quintus);
 				}
-				__m128 primus = _mm_load_ss(A + (j + k * m));
-				__m128 secundus = _mm_load_ss(A + (i + k * m));
-				__m128 tertius = _mm_load_ss(C + (i + j * m));
-				__m128 quartus = _mm_mul_ss(primus, secundus);
-				__m128 quintus = _mm_add_ss(tertius, quartus);
+				primus = _mm_load_ss(A + (j + k * m));
+				secundus = _mm_load_ss(A + (i + k * m));
+				tertius = _mm_load_ss(C + (i + j * m));
+				quartus = _mm_mul_ss(primus, secundus);
+				quintus = _mm_add_ss(tertius, quartus);
 				_mm_store_ss(C + (i + j * m), quintus);
 			}
 		}
