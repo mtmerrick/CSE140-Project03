@@ -3,6 +3,7 @@
 //SSE
 void dgemm( int m, int n, float *A, float *C )
 {
+<<<<<<< HEAD
 	for( int i = 0; i < m; i++ ) {
 		for( int k = 0; k < n; k++ ) {
 			if(i + 3 < m && k + 3 < n){
@@ -16,6 +17,11 @@ void dgemm( int m, int n, float *A, float *C )
 				}
 			}
 			for (int j = 0; j < m; j++){
+=======
+	for( int k = 0; k < n; k++ ) {
+		for( int i = 0; i < m; i++ ) {
+			for( int j = 0; j < m; j++ ){
+>>>>>>> parent of 3f3a06a... Ver. Last Try
 				__m128 primus = _mm_load_ss(A + (j + k * m));
 				__m128 secundus = _mm_load_ss(A + (i + k * m));
 				__m128 tertius = _mm_load_ss(C + (i + j * m));
