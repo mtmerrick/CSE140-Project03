@@ -7,7 +7,7 @@ void dgemm( int m, int n, float *A, float *C )
 		for( int k = 0; k < n; k++ ) {
 			for( int j = 0; j < m; j+=4 ){
 				__m128 primus, secundus, tertius, quartus, quintus;
-				else if(j + 3 < m && i + 3 < m){
+				if(j + 3 < m && i + 3 < m){
 					primus = _mm_load_ps(A + (j + k * m));
 					secundus = _mm_load_ps(A + (i + k * m));
 					tertius = _mm_load_ps(C + (i + j * m));
